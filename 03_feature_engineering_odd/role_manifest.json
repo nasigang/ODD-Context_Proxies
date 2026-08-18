@@ -1,0 +1,99 @@
+{
+  "version": "1.0",
+  "description": "WOMD Phase 2 feature role manifest — defines allowed model inputs, banned columns, and targets",
+
+  "C_ODD": {
+    "description": "Operational Design Domain context features (topology, geometry, traffic, signal, route, quality)",
+    "features": {
+      "topology": [
+        "odd_n_map_features",
+        "odd_n_lanes",
+        "odd_n_road_lines",
+        "odd_n_road_edges"
+      ],
+      "geometry": [
+        "odd_n_crosswalks",
+        "odd_n_stop_signs",
+        "odd_n_speed_bumps",
+        "odd_n_driveways"
+      ],
+      "traffic": [
+        "odd_n_valid_agents",
+        "odd_n_vehicles",
+        "odd_n_pedestrians",
+        "odd_n_cyclists"
+      ],
+      "signal": [
+        "odd_has_signal",
+        "odd_n_active_signals",
+        "odd_signal_go_ratio",
+        "odd_signal_stop_ratio"
+      ],
+      "route": [],
+      "quality": []
+    },
+    "notes": {
+      "route": "sdc_paths has 0% coverage — route features unsupported, not fabricated",
+      "quality": "weather/visibility/friction unsupported in WOMD Motion proto"
+    }
+  },
+
+  "Z_state": {
+    "description": "Ego dynamic state features",
+    "features": [
+      "ego_speed_mps",
+      "ego_speed_ratio"
+    ],
+    "definitions": {
+      "ego_speed_mps": "SDC derived_speed_mps at current frame",
+      "ego_speed_ratio": "ego_speed_mps / speed_limit (set to ego_speed_mps / 13.4 as proxy, ~30mph default)"
+    }
+  },
+
+  "BANNED_from_model_input": {
+    "description": "These columns must NEVER appear in model feature matrices. Leakage audit checks this.",
+    "columns": [
+      "derived_ttc_2d_s",
+      "ttc_min_s",
+      "y_log_ttc",
+      "ttc_censored",
+      "derived_dtc_m",
+      "derived_closing_speed_mps",
+      "derived_overlap_now",
+      "derived_hit_future",
+      "derived_pair_valid",
+      "derived_ttc_status",
+      "n_eligible_pairs",
+      "target_object_id",
+      "target_object_type",
+      "target_status",
+      "exposure_flag",
+      "derived_accel_mps2",
+      "derived_jerk_mps3",
+      "closing_speed",
+      "relative_speed",
+      "collision_flag",
+      "overlap_flag",
+      "hit_future",
+      "DRAC",
+      "RSS",
+      "jerk",
+      "acceleration",
+      "cross_track_error",
+      "best_ttci"
+    ],
+    "patterns": [
+      "ttc", "ttci", "collision", "drac", "rss", "closing", "overlap"
+    ]
+  },
+
+  "targets": {
+    "description": "Model target columns — used only as labels, never as inputs",
+    "columns": {
+      "y_log_ttc": "log(max(TTC, T_MIN_S)) for events, log(T_MAX_S) for censored",
+      "ttc_censored": "True if right-censored, False otherwise",
+      "exposure_flag": "1 if eligible pair exists, 0 otherwise",
+      "target_status": "event | right_censored | no_exposure | invalid_ego_state | invalid_frame"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage[review,datasets]{wacv}
+
+\input{preamble}
+
+\definecolor{wacvblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=wacvblue]{hyperref}
+
+\def\wacvPaperID{9876}
+\def\confName{WACV}
+\def\confYear{2027}
+
+\title{Beyond the Nearest Actor: A Scenario-Disjoint Audit of Current-Frame ODD-Context Proxies in WOMD}
+
+\author{Anonymous WACV Datasets Track submission\\
+Paper ID \wacvPaperID
+}
+
+\begin{document}
+\maketitle
+\input{sec/0_abstract}
+\input{sec/1_intro}
+\input{sec/2_related_work}
+\input{sec/3_problem_formulation}
+\input{sec/4_data_and_protocol}
+\input{sec/5_primary_results}
+\input{sec/6_mechanism_and_temporal}
+\input{sec/7_discussion_limitations}
+\input{sec/8_conclusion}
+
+{
+    \small
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{references}
+}
+
+\end{document}

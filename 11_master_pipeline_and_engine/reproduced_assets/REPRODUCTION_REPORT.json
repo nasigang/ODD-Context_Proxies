@@ -1,0 +1,14 @@
+{
+  "submission_paper_id": "9876",
+  "reproduction_status": "SELECTED_AGGREGATE_CHECKS_PASSED",
+  "selected_assertions_checked": 11,
+  "verified_tables": [
+    "TABLE1_NESTED_MODELS",
+    "TABLE3_FEATURE_CONFIRMATION",
+    "TABLE4_KPI_ALIGNMENT"
+  ],
+  "reproduced_figures": [
+    "reproduced_fig2_forest_plot.png"
+  ],
+  "exit_code": 0
+}

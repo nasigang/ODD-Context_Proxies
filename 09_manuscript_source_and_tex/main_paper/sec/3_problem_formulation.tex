@@ -1,0 +1,25 @@
+\section{Problem Formulation and Construct Boundary}
+\label{sec:construct}
+
+\subsection{Ego-Centric Target Estimand}
+Let $\mathcal{A}_{70}(s,t)$ denote eligible dynamic actors with valid current states within $70\text{ m}$ of the SDC in scenario $s$ at frame $t$. The binary reference label is
+\begin{equation}
+Y_{s,t}^{(\tau)} = \mathbb{1}\!\left[\min_{j \in \mathcal{A}_{70}(s,t)} \operatorname{TTC}_{\mathrm{OBB}}(\mathrm{SDC}, j) \le \tau\right], \quad \tau = 3\text{ s}.
+\end{equation}
+Valid frames with $\mathcal{A}_{70}(s,t) = \emptyset$ are assigned $Y_{s,t}^{(\tau)} = 0$. The TTC is obtained by a constant-velocity swept OBB/SAT extrapolation from the state observed at frame $t$. Thus, ``all-nearby-actor'' refers to all eligible SDC--actor pairs, not arbitrary actor--actor pairs. The label is an analytical ego-centric surrogate, not an observed collision, causal risk, or system-safety ground truth.
+
+For feature-level and temporal analyses, we additionally use the continuous score
+\begin{equation}
+C_{s,t} = \begin{cases}
+1, & \mathrm{TTC}_{s,t} = 0,\\
+1 - \mathrm{TTC}_{s,t}/10, & 0 < \mathrm{TTC}_{s,t} < 10\text{ s},\\
+0, & \text{otherwise},
+\end{cases}
+\end{equation}
+where $\mathrm{TTC}_{s,t}$ is the minimum eligible SDC--actor swept OBB-TTC; ``otherwise'' includes TTC of at least 10 s and the absence of an eligible predicted contact. This bounded score is an analysis surrogate and not a calibrated probability.
+
+\subsection{Shared-State Construct Boundary}
+The interaction proxies summarize non-focal actors relative to the SDC after excluding the nearest-clearance focal actor. Both these proxies and the TTC reference use current-state geometry and velocity. Their association therefore represents shared-state convergent validity conditional on the focal controls; it must not be interpreted as target-independent information, causal influence, or closed-loop safety benefit.
+
+\subsection{Temporal Role: Retrospective Snapshot Analysis}
+Each WOMD training/validation sequence contains 91 samples over $9.0\text{ s}$ at $10\text{ Hz}$: 10 history samples, one current sample, and 80 future samples relative to the benchmark prediction origin. Our analysis is retrospective. At each evaluated index $t$, predictors use only the state recorded at that same index, and the TTC target is a linear kinematic extrapolation from that state.

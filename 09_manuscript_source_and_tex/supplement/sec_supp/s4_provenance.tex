@@ -1,0 +1,17 @@
+\section{Cohort Flow and Selection Provenance}
+\label{sec:supp_flow}
+
+\subsection{Cohort Breakdown}
+The frozen preprocessing input contained 18,445 agent-state and 18,445 map-feature scenario partitions. The evaluation pipeline enumerated every discovered agent-state partition and applied no further scenario sampling before deterministic splitting. Dynamic-signal partitions were available for 12,783 scenarios, but signal variables were excluded from the primary 17-feature set. Upstream source-shard coverage was not retained as probability-sampling metadata; the evaluated cohort should therefore not be interpreted as a representative sample of the full public corpus.
+
+The evaluated 18,445 scenarios (1,674,495 frames) were partitioned deterministically into:
+\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}
+    \item \textbf{Training Partition}: 12,828 scenarios (1,167,348 frames)
+    \item \textbf{Internal Validation Partition}: 2,813 scenarios (255,983 frames)
+    \item \textbf{Development Cohort Total}: 15,641 scenarios (1,423,331 frames)
+    \item \textbf{Sealed Internal Holdout Cohort}: 2,804 scenarios (255,164 frames)
+\end{itemize}
+Split assignment utilized \texttt{SHA256('womd\_r2\_split\_v1|42|' + scenario\_id)/2\^{}64} with thresholds $[0.70, 0.85]$.
+
+\subsection{Dataset Attribution and License Notice}
+This research was conducted using the Waymo Open Motion Dataset (v1.3.1) provided by Waymo LLC. In strict compliance with the Waymo Dataset License Agreement, raw TFRecords and individual per-frame derived records are not distributed in this supplementary package. Users must obtain authorized access directly from the official Waymo portal (\url{https://waymo.com/open}).

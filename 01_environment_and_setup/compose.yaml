@@ -1,0 +1,31 @@
+services:
+  phase2:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        INSTALL_MODEL: ${INSTALL_MODEL:-0}
+    image: waymo-motion-phase2:py310
+    working_dir: /workspace/waymo_motion_project
+    stdin_open: true
+    tty: true
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    environment:
+      PROJECT_ROOT: /workspace/waymo_motion_project
+      WOMD_ROOT: /mnt/womd
+      PHASE2_OUTPUT_ROOT: /mnt/phase2_outputs
+      PYTHONPATH: /workspace/waymo_motion_project:/workspace/waymo_motion_project/src
+      TF_CPP_MIN_LOG_LEVEL: "2"
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - type: bind
+        source: ${PROJECT_HOST_ROOT:?Run scripts/host_preflight.sh first}
+        target: /workspace/waymo_motion_project
+      - type: bind
+        source: ${WOMD_HOST_ROOT:?Run scripts/host_preflight.sh first}
+        target: /mnt/womd
+        read_only: true
+      - type: bind
+        source: ${WOMD_OUTPUT_HOST_ROOT:?Run scripts/host_preflight.sh first}
+        target: /mnt/phase2_outputs
+    command: ["bash"]

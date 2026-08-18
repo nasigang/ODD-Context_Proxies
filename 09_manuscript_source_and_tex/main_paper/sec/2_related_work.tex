@@ -1,0 +1,8 @@
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Safety Surrogates in Autonomous Driving}
+Time-to-collision (TTC) and its variants (e.g., Modified TTC, Time-Exposed TTC) are foundational surrogates for traffic conflict severity~\cite{hayward1972near,minderhoud2001extended,laureshyn2010surrogate,westhofen2023criticality}. In automated vehicle development and large-scale public motion forecasting benchmarks (e.g., nuScenes~\cite{caesar2020nuscenes}, Argoverse~\cite{chang2019argoverse}, WOMD~\cite{ettinger2021large}), criticality metrics are widely used for mining scenarios and benchmarking models. SafeShift~\cite{stoler2024safeshift} explores safety-critical distribution shifts under geographical and environmental variations. Puphal~\etal~\cite{puphal2025risk} propose risk-based filtering in WOMD. Weng~\etal~\cite{weng2023joint} emphasize joint multi-agent evaluation. However, benchmark evaluations frequently reduce scenes to focal agent pairs without quantifying what information is omitted.
+
+\subsection{ODD-Context Representation and Scene Analysis}
+Taxonomies for operational design domains (ODD) emphasize static geometry, dynamic actor mix, and environmental conditions~\cite{koopman2017challenges,iso34503,saej3016,ulbrich2015defining}. Query-centric and transformer-based motion forecasting architectures (e.g., MTR~\cite{shi2022motion}, QCNet~\cite{zhou2023query}) aggregate multi-agent context via attention mechanisms. Together, these studies motivate interaction-aware evaluation; our focus is complementary: we audit whether dataset-observable current-frame ODD-context proxies add predictive information beyond a focal SDC--actor kinematic baseline for an ego-centric TTC target.

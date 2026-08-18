@@ -1,0 +1,49 @@
+\section{Threshold Sensitivity and KPI Construct Validity}
+\label{sec:supp_sensitivity}
+
+\subsection{Threshold Sensitivity Analysis}
+Table~\ref{tab:supp_sensitivity} presents the post-lock sensitivity analysis over collision horizon thresholds $\tau \in \{2.0\text{s}, 3.0\text{s}, 5.0\text{s}\}$.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4.5pt}
+\renewcommand{\arraystretch}{0.88}
+\vspace{-3mm}
+\caption{\textbf{Sensitivity to Collision Horizon Threshold $\tau$ (Sealed Holdout).}}
+\label{tab:supp_sensitivity}
+\begin{tabular}{cccccc}
+\toprule
+$\tau$ & \textbf{Prevalence} & $M_P$ \textbf{AP} & $M_{P+E_{\text{all}}}$ \textbf{AP} & $\Delta\textbf{AP}$ & $\Delta\textbf{AUROC}$ \\
+\midrule
+$2.0\text{s}$ & $1.50\%$ & $0.3161$ & $0.2719$ & $-0.0442$ & $+0.0240$ \\
+$3.0\text{s}$ & $5.61\%$ & $0.3224$ & $0.3370$ & $+0.0147$ & $+0.0377$ \\
+$5.0\text{s}$ & $17.97\%$ & $0.4972$ & $0.5633$ & $+0.0660$ & $+0.0452$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Development-Only KPI Construct Validity}
+Table~\ref{tab:supp_kpi} reports development-only convergent alignment between the continuous TTC-based severity score and within-dataset vehicle-response KPIs from \texttt{KPI\_CONSTRUCT\_VALIDITY\_V6.csv}.
+The weak positive rank correlations and negative known-group effect sizes for the two DRAC summaries are directionally discordant. We therefore treat this axis as mixed supportive construct evidence, not external validation.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4.5pt}
+\renewcommand{\arraystretch}{0.88}
+\vspace{-3mm}
+\caption{\textbf{Supportive Within-Dataset Vehicle-Response KPI Alignment on Development Split.}}
+\label{tab:supp_kpi}
+\begin{tabular}{lcc}
+\toprule
+\textbf{KPI Metric} & \textbf{Spearman $\rho$} & \textbf{Cohen's $d$} \\
+\midrule
+SDC hard deceleration p95 & $+0.1347$ & $+0.3451$ \\
+SDC min longitudinal acceleration & $-0.1248$ & $-0.1013$ \\
+True-clearance DRAC p95 & $+0.0498$ & $-0.0946$ \\
+True-clearance DRAC maximum & $+0.0524$ & $-0.0372$ \\
+SDC absolute jerk p95 & $+0.0306$ & $+0.0395$ \\
+\bottomrule
+\end{tabular}
+\end{table}

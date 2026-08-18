@@ -1,0 +1,6 @@
+# Optional model/training layer. Keep it separate from the Prompt 0 parser
+# image so that parser failures are not hidden by unrelated ML dependencies.
+torch==2.2.2
+matplotlib==3.7.5
+seaborn==0.13.2
+statsmodels==0.14.1

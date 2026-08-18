@@ -1,0 +1,41 @@
+{
+    "version": "1.0",
+    "description": "Scenario-level split manifest for WOMD Phase 2 model experiment",
+    "policy": {
+        "split_unit": "scenario_id",
+        "frame_random_split": "FORBIDDEN",
+        "rationale": "All frames from one scenario must belong to the same split to prevent temporal leakage"
+    },
+    "source_splits": {
+        "womd_training": {
+            "total_scenarios": 59584,
+            "role": "Split into train / internal_val / internal_holdout",
+            "sub_splits": {
+                "train": {
+                    "fraction": 0.70,
+                    "purpose": "Fit scalers, bin thresholds, vocabulary, event thresholds, and train models"
+                },
+                "internal_val": {
+                    "fraction": 0.15,
+                    "purpose": "Hyperparameter selection and early stopping"
+                },
+                "internal_holdout": {
+                    "fraction": 0.15,
+                    "purpose": "Unbiased evaluation before external test"
+                }
+            }
+        },
+        "womd_validation": {
+            "total_scenarios": 44097,
+            "role": "external_test",
+            "purpose": "Final evaluation — never used during training or hyperparameter tuning"
+        }
+    },
+    "fitting_rules": {
+        "scaler_fit": "train only",
+        "bin_threshold_fit": "train only",
+        "vocabulary_fit": "train only",
+        "event_threshold_fit": "train only"
+    },
+    "random_seed": 42
+}

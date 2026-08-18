@@ -1,0 +1,4 @@
+profile_component,spearman_5hz_subsampling,spearman_2hz_subsampling,recomputed_from_actual_frames,robustness_verdict
+criticality_peak,0.964390402347436,0.9232161380491348,True,ROBUST_UNDER_TEMPORAL_SUBSAMPLING
+criticality_auc_s,0.9966462750025092,0.9880038667537336,True,ROBUST_UNDER_TEMPORAL_SUBSAMPLING
+tet_3s_s,0.9726739514273686,0.9367339936413565,True,ROBUST_UNDER_TEMPORAL_SUBSAMPLING

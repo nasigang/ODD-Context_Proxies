@@ -1,0 +1,17 @@
+\section{Data and Sealed Evaluation Protocol}
+\label{sec:data_protocol}
+
+\subsection{Cohort Provenance and Sealed Split}
+We analyze all $18,445$ WOMD v1.3.1 scenario partitions discovered in the frozen local preprocessing input; the evaluation pipeline applied no further scenario sampling before splitting. The preprocessing artifacts do not retain upstream source-shard coverage as probability-sampling metadata, so this cohort should not be interpreted as representative of the full corpus. A namespace- and seed-fixed SHA-256 assignment partitions the processed cohort by scenario ID into $12,828$ training, $2,813$ internal-validation, and $2,804$ internal-holdout scenarios; all 91 samples from a scenario remain in one split. Development comprises training plus internal validation ($15,641$ scenarios). All model and analysis choices were locked before the single holdout inference pass.
+
+\subsection{Feature Taxonomy}
+$P_{\mathrm{clean}}$ contains 12 current-frame focal controls: SDC speed, tangential acceleration, and yaw rate; focal relative longitudinal and lateral position and velocity; focal speed; OBB clearance and center distance; and indicators for vehicle and vulnerable-road-user focal types. The focal actor is selected by current OBB clearance independently of the TTC outcome. The 17 ODD-context proxies comprise five static-roadway features (distances to crosswalk, stop sign, speed bump, and road edge, plus local lane-heading dispersion), six traffic-composition features (actor counts within 30/50/70 m, vehicle and VRU proportions within 70 m, and actor-type entropy), and six non-focal SDC-relative interaction features (nearest distance, mean speed, speed standard deviation, heading dispersion, and maximum/summed closing pressure).
+
+\subsection{Model Setup and Scenario-Equal Weighting}
+All nested models use \texttt{HistGradientBoostingClassifier(max\_iter=100, max\_depth=6, random\_state=42)} under scikit-learn 1.7.1; unspecified parameters retain that version's defaults. Development-stage choices were made using the training/internal-validation partition and then locked. Each final frozen model was refit on all $15,641$ development scenarios using scenario-equal frame weights, and the holdout pass contained zero \texttt{fit} calls. For scenario $s$ with $n_s$ valid frames, each frame receives $w_{s,t} = 1 / n_s$, so every scenario contributes equal total weight to AP, AUROC, and Brier score.
+
+\subsection{Statistical Inference Protocol}
+We use 1,000 paired scenario-block bootstrap replicates with seed 42. Each replicate samples holdout scenario IDs with replacement, retains every frame of each sampled scenario, and evaluates both members of a contrast on the identical draw. Within each occurrence, frame weights again sum to one per sampled scenario. We report percentile $95\%$ confidence intervals for paired metric differences; we do not interpret bootstrap sign-tail counts as calibrated p-values.
+
+\subsection{Individual Conditional Feature Effect Definition}
+For feature-level confirmation, we use continuous frame severity $C_{s,t}$ rather than the binary threshold label. On development data only, separate Ridge models with $\alpha=1$ regress each candidate proxy $E_i$ and $C$ on $P_{\mathrm{clean}}$, using scenario-equal weights. Frozen nuisance models produce holdout residuals $r(E_i)$ and $r(C)$; the reported conditional effect is Spearman's $\rho[r(E_i), r(C)]$. Confidence intervals resample scenarios as blocks. The 13 candidates were frozen before holdout access.

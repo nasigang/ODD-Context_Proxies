@@ -1,0 +1,44 @@
+\section{Complete Scenario Profile Temporal Matrix}
+\label{sec:supp_scenario}
+
+Table~\ref{tab:supp_scenario} details the scenario-level temporal associations across all 17 operational-context features on the sealed holdout ($N=2,804$ scenarios) across target Peak, Area-Under-Curve (AUC), and Time-Exposed TTC (TET3). Cross-level classes are assigned from the sign and $95\%$ CI support of the frame effect and the target-Peak effect only; AUC and TET3 are displayed as additional temporal dimensions and do not determine the class label.
+
+Display labels map to machine-readable classifications as follows:
+\texttt{Stable} $\to$ \texttt{CROSS\_LEVEL\_STABLE},
+\texttt{Unsupported} $\to$ \texttt{UNSUPPORTED\_BOTH},
+\texttt{Frame-local} $\to$ \texttt{FRAME\_LOCAL},
+\texttt{Sign-discordant} $\to$ \texttt{DISCORDANT\_SIGN}, and
+\texttt{Temporal-only} $\to$ \texttt{TEMPORAL\_EXPOSURE\_SPECIFIC}.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{0.88}
+\vspace{-3mm}
+\caption{\textbf{Complete 17-Feature Scenario Profile Temporal Matrix on Sealed Holdout.}}
+\label{tab:supp_scenario}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Feature Name} & \textbf{Target Peak [95\% CI]} & \textbf{Target AUC ($\rho$)} & \textbf{Target TET3 ($\rho$)} & \textbf{Class} \\
+\midrule
+\texttt{dist\_crosswalk} & -0.1285 [-0.167, -0.091] & -0.1204 & -0.1110 & Stable \\
+\texttt{dist\_stop\_sign} & -0.0265 [-0.062, +0.010] & +0.0058 & -0.0535 & Unsupported \\
+\texttt{dist\_speed\_bump} & +0.0334 [-0.002, +0.067] & +0.0035 & +0.0213 & Unsupported \\
+\texttt{dist\_road\_edge} & -0.0040 [-0.036, +0.031] & +0.0736 & -0.0137 & Frame-local \\
+\texttt{lane\_heading\_disp\_50m} & +0.0212 [-0.018, +0.057] & -0.0458 & -0.0065 & Sign-discordant \\
+\texttt{n\_actors\_30m} & +0.0475 [+0.013, +0.082] & +0.0255 & +0.0476 & Stable \\
+\texttt{n\_actors\_50m} & +0.0579 [+0.023, +0.092] & +0.0297 & +0.0437 & Stable \\
+\texttt{n\_actors\_70m} & +0.0606 [+0.028, +0.096] & +0.0344 & +0.0236 & Stable \\
+\texttt{vehicle\_prop\_70m} & -0.0005 [-0.039, +0.034] & +0.0231 & -0.0353 & Unsupported \\
+\texttt{vru\_prop\_70m} & +0.0007 [-0.035, +0.039] & -0.0228 & +0.0378 & Unsupported \\
+\texttt{actor\_entropy\_70m} & +0.0098 [-0.025, +0.048] & -0.0204 & +0.0058 & Unsupported \\
+\texttt{tp\_nearest\_dist} & -0.0460 [-0.084, -0.008] & -0.0285 & +0.0036 & Stable \\
+\texttt{tp\_mean\_speed} & -0.0591 [-0.097, -0.022] & -0.0322 & -0.0038 & Stable \\
+\texttt{tp\_speed\_std} & -0.0021 [-0.038, +0.032] & +0.0262 & +0.0254 & Unsupported \\
+\texttt{tp\_heading\_disp} & +0.0790 [+0.041, +0.116] & +0.0035 & +0.0085 & Temporal-only \\
+\texttt{tp\_closing\_pressure\_max} & +0.0528 [+0.014, +0.090] & +0.0753 & +0.0362 & Stable \\
+\texttt{tp\_closing\_pressure\_sum} & +0.1914 [+0.155, +0.230] & +0.2345 & +0.0728 & Stable \\
+\bottomrule
+\end{tabular}
+\end{table}
